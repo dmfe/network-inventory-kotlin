@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
 @SpringBootApplication
-class NetworkInventoryApplication
+open class NetworkInventoryApplication
 
 fun main(args: Array<String>) {
     SpringApplication.run(NetworkInventoryApplication::class.java, *args)
