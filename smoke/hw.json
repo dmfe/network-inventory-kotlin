@@ -1,0 +1,5 @@
+{
+    "name": "cisco-router-1-hw-platform",
+    "description": "Cisco HW platform",
+    "hardwareRev": "rev4.3"
+}
