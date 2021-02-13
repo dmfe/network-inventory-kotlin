@@ -21,17 +21,23 @@ class HardwareComponentController(
     @ResponseStatus(HttpStatus.OK)
     fun getAllHardwareComponents() = hardwareComponentService.findAllHardwareComponents()
 
+    @GetMapping("/{ne_id}")
+    fun getHardwareComponentByNeId(@PathVariable("ne_id") neId: Long) =
+        hardwareComponentService.findHardwareComponentByNeId(neId)
+
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    fun getHardwareComponentById(@PathVariable id: Long) = hardwareComponentService.findHardwareComponentById(id)
+    fun getHardwareComponentById(@PathVariable id: Long) =
+        hardwareComponentService.findHardwareComponentById(id)
 
-    @GetMapping("/by_name")
+    @GetMapping("/find")
     @ResponseStatus(HttpStatus.OK)
     fun getHardwareComponentByName(@RequestParam name: String) =
         hardwareComponentService.findHardwareComponentByName(name)
 
-    @PostMapping
+    @PostMapping("/{ne_id}")
     @ResponseStatus(HttpStatus.CREATED)
-    fun createHardwareComponent(@RequestBody hardwareComponent: HardwareComponent) =
-        hardwareComponentService.saveHardwareComponent(hardwareComponent)
+    fun createHardwareComponent(@PathVariable("ne_id") neId: Long,
+                                @RequestBody hardwareComponent: HardwareComponent) =
+        hardwareComponentService.saveHardwareComponent(neId, hardwareComponent)
 }

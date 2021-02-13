@@ -40,8 +40,13 @@ class InventoryService(
     }
 
     @Override
-    override fun findHardwareComponentById(id: Long): Optional<HardwareComponent> {
-        return hardwareComponentRepository.findById(id)
+    override fun findHardwareComponentByNeId(neId: Long): HardwareComponent {
+        return hardwareComponentRepository.findByNeId(neId).orElseThrow()
+    }
+
+    @Override
+    override fun findHardwareComponentById(id: Long): HardwareComponent {
+        return hardwareComponentRepository.findById(id).orElseThrow()
     }
 
     @Override
@@ -50,7 +55,10 @@ class InventoryService(
     }
 
     @Override
-    override fun saveHardwareComponent(hardwareComponent: HardwareComponent): Long {
+    override fun saveHardwareComponent(neId: Long, hardwareComponent: HardwareComponent): Long {
+        val ne = networkElementRepository.findById(neId).orElseThrow()
+        hardwareComponent.networkElement = ne
+
         return hardwareComponentRepository.save(hardwareComponent).id ?: 0
     }
 }

@@ -25,7 +25,7 @@ class NetworkElementController(
     @ResponseStatus(HttpStatus.OK)
     fun getNetworkElementById(@PathVariable id: Long) = networkElementService.findNetworkElementById(id)
 
-    @GetMapping("/by_name")
+    @GetMapping("/find")
     @ResponseStatus(HttpStatus.OK)
     fun getNetworkElementByName(@RequestParam name: String) = networkElementService.findNetworkElementByName(name)
 

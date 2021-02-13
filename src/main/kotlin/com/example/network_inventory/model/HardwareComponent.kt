@@ -26,5 +26,5 @@ data class HardwareComponent(
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ne_id")
-    val networkElement: NetworkElement? = null
+    var networkElement: NetworkElement? = null
 )

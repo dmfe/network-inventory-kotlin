@@ -1,12 +1,9 @@
 package com.example.network_inventory.model
 
 import javax.persistence.Entity
-import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
-import javax.persistence.JoinColumn
-import javax.persistence.OneToOne
 import javax.persistence.Table
 
 @Entity
@@ -22,9 +19,5 @@ data class NetworkElement(
 
     val type: String? = null,
 
-    val vendor: String? = null,
-
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "hw_component_id")
-    val hwComponent: HardwareComponent? = null
+    val vendor: String? = null
 )
