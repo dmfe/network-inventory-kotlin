@@ -1,11 +1,11 @@
 package com.example.network_inventory.services
 
+import com.example.network_inventory.exceptions.ObjectNotFoundException
 import com.example.network_inventory.model.HardwareComponent
 import com.example.network_inventory.model.NetworkElement
 import com.example.network_inventory.repositories.HardwareComponentRepository
 import com.example.network_inventory.repositories.NetworkElementRepository
 import org.springframework.stereotype.Service
-import java.util.Optional
 
 @Service
 class InventoryService(
@@ -20,8 +20,10 @@ class InventoryService(
     }
 
     @Override
-    override fun findNetworkElementById(id: Long): Optional<NetworkElement> {
-        return networkElementRepository.findById(id)
+    override fun findNetworkElementById(id: Long): NetworkElement {
+        return networkElementRepository.findById(id).orElseThrow {
+            ObjectNotFoundException("Network Element with id: $id not found.")
+        }
     }
 
     @Override
@@ -41,12 +43,16 @@ class InventoryService(
 
     @Override
     override fun findHardwareComponentByNeId(neId: Long): HardwareComponent {
-        return hardwareComponentRepository.findByNeId(neId).orElseThrow()
+        return hardwareComponentRepository.findByNeId(neId).orElseThrow {
+            ObjectNotFoundException("Network element with id: $neId not found.")
+        }
     }
 
     @Override
     override fun findHardwareComponentById(id: Long): HardwareComponent {
-        return hardwareComponentRepository.findById(id).orElseThrow()
+        return hardwareComponentRepository.findById(id).orElseThrow{
+            ObjectNotFoundException("Hardware component with id: $id not found.")
+        }
     }
 
     @Override
@@ -56,7 +62,9 @@ class InventoryService(
 
     @Override
     override fun saveHardwareComponent(neId: Long, hardwareComponent: HardwareComponent): Long {
-        val ne = networkElementRepository.findById(neId).orElseThrow()
+        val ne = networkElementRepository.findById(neId).orElseThrow{
+            ObjectNotFoundException("Network element with id: $neId not found.")
+        }
         hardwareComponent.networkElement = ne
 
         return hardwareComponentRepository.save(hardwareComponent).id ?: 0

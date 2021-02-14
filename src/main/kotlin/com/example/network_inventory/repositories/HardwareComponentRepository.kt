@@ -12,6 +12,6 @@ interface HardwareComponentRepository : CrudRepository<HardwareComponent, Long> 
 
     fun findByName(name: String): Iterable<HardwareComponent>
 
-    @Query("select hw from hardware_component hw where ne_id = :ne_id")
+    @Query("select hw from HardwareComponent hw where ne_id = :ne_id")
     fun findByNeId(@Param("ne_id") neId: Long): Optional<HardwareComponent>
 }

@@ -21,7 +21,7 @@ class HardwareComponentController(
     @ResponseStatus(HttpStatus.OK)
     fun getAllHardwareComponents() = hardwareComponentService.findAllHardwareComponents()
 
-    @GetMapping("/{ne_id}")
+    @GetMapping("/network-element/{ne_id}")
     fun getHardwareComponentByNeId(@PathVariable("ne_id") neId: Long) =
         hardwareComponentService.findHardwareComponentByNeId(neId)
 
@@ -35,7 +35,7 @@ class HardwareComponentController(
     fun getHardwareComponentByName(@RequestParam name: String) =
         hardwareComponentService.findHardwareComponentByName(name)
 
-    @PostMapping("/{ne_id}")
+    @PostMapping("/network-element/{ne_id}")
     @ResponseStatus(HttpStatus.CREATED)
     fun createHardwareComponent(@PathVariable("ne_id") neId: Long,
                                 @RequestBody hardwareComponent: HardwareComponent) =
